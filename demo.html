@@ -176,11 +176,41 @@
         color: #00192f;
         border: none;
       }
+      .year-tab {
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: #0f1525;
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .year-tab.active {
+        background: var(--accent);
+        color: #00192f;
+        border: none;
+      }
+      .year-content {
+        display: none;
+      }
+      .year-content.active {
+        display: block;
+      }
       textarea {
         width: 100%;
         min-height: 220px;
         padding: 12px;
         resize: vertical;
+      }
+      .year-textarea {
+        width: 100%;
+        min-height: 220px;
+        padding: 12px;
+        resize: vertical;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: #0f1525;
+        color: var(--text);
       }
 
       .pill {
@@ -614,12 +644,12 @@
 
         <div class="grid2">
           <div class="card">
-            <div class="tabs">
+            <div class="tabs" id="yearTabs"></div>
+            <div class="tabs" style="margin-top: 8px">
               <div class="tab active" data-tab="urls">URL thô</div>
               <div class="tab" data-tab="lv3">Danh sách domain LV3</div>
             </div>
-            <textarea id="out"></textarea>
-            <textarea id="outLv3" style="display: none"></textarea>
+            <div id="yearContent"></div>
           </div>
           <div class="card">
             <b>Log</b>
@@ -676,8 +706,8 @@
     <script>
       (() => {
         const CDX = "https://web.archive.org/cdx/search/cdx"; // gọi trực tiếp
-        const out = document.getElementById("out");
-        const outLv3 = document.getElementById("outLv3");
+        const yearTabs = document.getElementById("yearTabs");
+        const yearContent = document.getElementById("yearContent");
         const log = document.getElementById("log");
         const statusEl = document.getElementById("status");
         const pill = document.getElementById("statpill");
@@ -686,9 +716,15 @@
         const btnDl = document.getElementById("download");
         const btnDlLv3 = document.getElementById("downloadLv3");
         const btnHtml = document.getElementById("downloadHtml");
-        const tabs = document.querySelectorAll(".tab");
+        const tabs = document.querySelectorAll(
+          '[data-tab="urls"], [data-tab="lv3"]'
+        );
 
         let stopFlag = false;
+        let dataByYear = {}; // { year: { urls: Set, lv3: Set } }
+        let currentYear = null;
+        let currentType = "urls"; // "urls" or "lv3"
+
         const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
         const logln = (s) => {
           log.textContent += s + "\n";
@@ -754,8 +790,64 @@
           return [];
         }
 
-        function updateStats(urlCount, lv3Count) {
-          pill.textContent = `URL: ${urlCount} • LV3: ${lv3Count}`;
+        function updateStats() {
+          let totalUrls = 0;
+          let totalLv3 = 0;
+          for (const year in dataByYear) {
+            totalUrls += dataByYear[year].urls.size;
+            totalLv3 += dataByYear[year].lv3.size;
+          }
+          pill.textContent = `URL: ${totalUrls} • LV3: ${totalLv3}`;
+        }
+
+        function renderYearTabs() {
+          const years = Object.keys(dataByYear).sort((a, b) => +a - +b);
+          yearTabs.innerHTML = "";
+          years.forEach((year) => {
+            const tab = document.createElement("div");
+            tab.className = `year-tab ${year === currentYear ? "active" : ""}`;
+            tab.textContent = year;
+            tab.dataset.year = year;
+            tab.onclick = () => switchYear(year);
+            yearTabs.appendChild(tab);
+          });
+        }
+
+        function renderYearContent() {
+          if (!currentYear || !dataByYear[currentYear]) {
+            yearContent.innerHTML = "";
+            return;
+          }
+          const yearData = dataByYear[currentYear];
+          const urlsText = Array.from(yearData.urls).sort().join("\n");
+          const lv3Text = Array.from(yearData.lv3).sort().join("\n");
+
+          let out = document.getElementById("out");
+          let outLv3 = document.getElementById("outLv3");
+
+          if (!out) {
+            out = document.createElement("textarea");
+            out.id = "out";
+            out.className = "year-textarea";
+            yearContent.appendChild(out);
+          }
+          if (!outLv3) {
+            outLv3 = document.createElement("textarea");
+            outLv3.id = "outLv3";
+            outLv3.className = "year-textarea";
+            yearContent.appendChild(outLv3);
+          }
+
+          out.value = urlsText;
+          outLv3.value = lv3Text;
+          out.style.display = currentType === "urls" ? "block" : "none";
+          outLv3.style.display = currentType === "lv3" ? "block" : "none";
+        }
+
+        function switchYear(year) {
+          currentYear = year;
+          renderYearTabs();
+          renderYearContent();
         }
 
         async function run() {
@@ -765,8 +857,10 @@
           btnDl.disabled = true;
           btnHtml.disabled = true;
           btnDlLv3.disabled = true;
-          out.value = "";
-          outLv3.value = "";
+          dataByYear = {};
+          currentYear = null;
+          yearTabs.innerHTML = "";
+          yearContent.innerHTML = "";
           log.textContent = "";
           statusEl.textContent = "Đang chạy…";
 
@@ -779,11 +873,11 @@
           const ok200 = document.getElementById("ok200").checked;
           const onlylv3 = document.getElementById("onlylv3").checked;
 
-          const uniqURL = new Set();
-          const uniqLv3 = new Set();
-
           for (let y = yFrom; y <= yTo; y++) {
             if (stopFlag) break;
+            if (!dataByYear[y]) {
+              dataByYear[y] = { urls: new Set(), lv3: new Set() };
+            }
             logln(`[*] Năm ${y}…`);
             statusEl.textContent = `Năm ${y}…`;
             for (let off = 0; off <= maxOff; off += pageSize) {
@@ -807,23 +901,34 @@
               }
               for (const u of lines) {
                 const finalU = clean ? cleanURL(u) : u;
-                uniqURL.add(finalU);
+                dataByYear[y].urls.add(finalU);
                 try {
                   const h = new URL(finalU).hostname;
                   const lv3 = toLv3(h, domain);
-                  if (lv3) uniqLv3.add(lv3);
+                  if (lv3) dataByYear[y].lv3.add(lv3);
                 } catch {}
               }
-              out.value = Array.from(uniqURL).sort().join("\n");
-              outLv3.value = Array.from(uniqLv3).sort().join("\n");
-              updateStats(uniqURL.size, uniqLv3.size);
+              renderYearTabs();
+              if (!currentYear) {
+                currentYear = String(y);
+                switchYear(currentYear);
+              } else {
+                renderYearContent();
+              }
+              updateStats();
               logln(
-                `  • +${lines.length} URL @offset ${off} (tổng ≈ ${uniqURL.size}; LV3 ≈ ${uniqLv3.size})`
+                `  • +${lines.length} URL @offset ${off} (năm ${y}: ${dataByYear[y].urls.size} URL; ${dataByYear[y].lv3.size} LV3)`
               );
               await sleep(120);
             }
           }
-          statusEl.textContent = `Xong. Tổng ${uniqURL.size} URL; ${uniqLv3.size} domain LV3.`;
+          let totalUrls = 0;
+          let totalLv3 = 0;
+          for (const year in dataByYear) {
+            totalUrls += dataByYear[year].urls.size;
+            totalLv3 += dataByYear[year].lv3.size;
+          }
+          statusEl.textContent = `Xong. Tổng ${totalUrls} URL; ${totalLv3} domain LV3.`;
           btnStart.disabled = false;
           btnStop.disabled = true;
           btnDl.disabled = false;
@@ -831,19 +936,14 @@
           btnDlLv3.disabled = false;
         }
 
-        // Tabs
+        // Tabs for URL/LV3 switching
         tabs.forEach((t) =>
           t.addEventListener("click", () => {
             tabs.forEach((x) => x.classList.remove("active"));
             t.classList.add("active");
             const tab = t.getAttribute("data-tab");
-            if (tab === "urls") {
-              out.style.display = "block";
-              outLv3.style.display = "none";
-            } else {
-              out.style.display = "none";
-              outLv3.style.display = "block";
-            }
+            currentType = tab;
+            renderYearContent();
           })
         );
 
@@ -852,14 +952,56 @@
           stopFlag = true;
           statusEl.textContent = "Đã yêu cầu dừng…";
         };
-        btnDl.onclick = () =>
-          downloadText(out.value, `wayback_urls_${Date.now()}.txt`);
-        btnDlLv3.onclick = () =>
-          downloadText(outLv3.value, `domains_lv3_${Date.now()}.txt`);
+        btnDl.onclick = () => {
+          if (currentYear && dataByYear[currentYear]) {
+            const urls = Array.from(dataByYear[currentYear].urls)
+              .sort()
+              .join("\n");
+            downloadText(urls, `wayback_urls_${currentYear}_${Date.now()}.txt`);
+          } else {
+            // Download all years
+            let allUrls = [];
+            for (const year in dataByYear) {
+              allUrls.push(`\n=== Năm ${year} ===\n`);
+              allUrls.push(Array.from(dataByYear[year].urls).sort().join("\n"));
+            }
+            downloadText(
+              allUrls.join("\n"),
+              `wayback_urls_all_${Date.now()}.txt`
+            );
+          }
+        };
+        btnDlLv3.onclick = () => {
+          if (currentYear && dataByYear[currentYear]) {
+            const lv3 = Array.from(dataByYear[currentYear].lv3)
+              .sort()
+              .join("\n");
+            downloadText(lv3, `domains_lv3_${currentYear}_${Date.now()}.txt`);
+          } else {
+            // Download all years
+            let allLv3 = [];
+            for (const year in dataByYear) {
+              allLv3.push(`\n=== Năm ${year} ===\n`);
+              allLv3.push(Array.from(dataByYear[year].lv3).sort().join("\n"));
+            }
+            downloadText(
+              allLv3.join("\n"),
+              `domains_lv3_all_${Date.now()}.txt`
+            );
+          }
+        };
         btnHtml.onclick = () => {
-          const htmlContent = `<!doctype html><meta charset="utf-8"><title>Kết quả Wayback</title><h1>Kết quả</h1><h3>Domain LV3</h3><pre>${escapeHtml(
-            outLv3.value
-          )}</pre><h3>URL</h3><pre>${escapeHtml(out.value)}</pre>`;
+          let htmlContent = `<!doctype html><meta charset="utf-8"><title>Kết quả Wayback</title><h1>Kết quả Wayback Machine</h1>`;
+          const years = Object.keys(dataByYear).sort((a, b) => +a - +b);
+          for (const year of years) {
+            const urls = Array.from(dataByYear[year].urls).sort().join("\n");
+            const lv3 = Array.from(dataByYear[year].lv3).sort().join("\n");
+            htmlContent += `<h2>Năm ${year}</h2><h3>Domain LV3 (${
+              dataByYear[year].lv3.size
+            })</h3><pre>${escapeHtml(lv3)}</pre><h3>URL (${
+              dataByYear[year].urls.size
+            })</h3><pre>${escapeHtml(urls)}</pre>`;
+          }
           const blob = new Blob([htmlContent], {
             type: "text/html;charset=utf-8",
           });
