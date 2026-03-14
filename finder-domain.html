@@ -1,1161 +1,1148 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tool dò domain lv3 từ wayback machine by maxroi dubua253k</title>
-    <style>
-      :root {
-        --bg: #0b1020;
-        --panel: #121a2b;
-        --text: #e6ecff;
-        --muted: #9bb0d1;
-        --brand: #6ea8ff;
-        --brand2: #7cffc1;
-        --danger: #ff6b6b;
-        --border: rgba(255, 255, 255, 0.08);
-        --accent: linear-gradient(135deg, var(--brand), var(--brand2));
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        margin: 0;
-        background: radial-gradient(
-            1200px 600px at 10% -10%,
-            rgba(126, 255, 193, 0.08),
-            transparent
-          ),
-          radial-gradient(
-            900px 500px at 90% -10%,
-            rgba(110, 168, 255, 0.08),
-            transparent
-          ),
-          var(--bg);
-        color: var(--text);
-        font: 14px/1.55 system-ui, Segoe UI, Roboto, Arial;
-      }
-      a {
-        color: var(--brand);
-      }
-      .wrap {
-        max-width: 1180px;
-        margin: 12px auto;
-        padding: 0 16px;
-        gap: 12px;
-        align-items: start;
-      }
-      .title {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        grid-column: 1 / -1;
-      }
-      .logo {
-        width: 36px;
-        height: 36px;
-        border-radius: 12px;
-        background: var(--accent);
-        display: grid;
-        place-items: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      }
-      .logo b {
-        color: #001b2f;
-      }
-      h1 {
-        font-size: 30px;
-        margin: 0;
-      }
 
-      .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 18px;
-      }
-      .card {
-        background: linear-gradient(
-          to bottom,
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tool dò domain lv3 từ wayback machine by maxroi dubua253k</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a2b;
+      --text: #e6ecff;
+      --muted: #9bb0d1;
+      --brand: #6ea8ff;
+      --brand2: #7cffc1;
+      --danger: #ff6b6b;
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: linear-gradient(135deg, var(--brand), var(--brand2));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 600px at 10% -10%,
+          rgba(126, 255, 193, 0.08),
+          transparent),
+        radial-gradient(900px 500px at 90% -10%,
+          rgba(110, 168, 255, 0.08),
+          transparent),
+        var(--bg);
+      color: var(--text);
+      font: 14px/1.55 system-ui, Segoe UI, Roboto, Arial;
+    }
+
+    a {
+      color: var(--brand);
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 12px auto;
+      padding: 0 16px;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      grid-column: 1 / -1;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .logo b {
+      color: #001b2f;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: linear-gradient(to bottom,
           rgba(255, 255, 255, 0.03),
-          rgba(255, 255, 255, 0.015)
-        );
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 16px;
-      }
-      .row {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 12px;
-      }
-      label {
-        font-weight: 600;
-        color: var(--muted);
-        font-size: 12px;
-        margin-bottom: 6px;
-        display: block;
-      }
-      input,
-      select,
-      button,
-      textarea {
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: #0f1525;
-        color: var(--text);
-      }
-      input,
-      select {
-        padding: 10px 12px;
-        width: 100%;
-      }
-      .check {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .btns {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 8px;
-      }
-      button {
-        padding: 10px 14px;
-        font-weight: 600;
-        cursor: pointer;
-      }
-      .btn-primary {
-        background: var(--accent);
-        color: #00192f;
-        border: none;
-      }
-      .btn-ghost {
-        background: transparent;
-      }
-      .btn-danger {
-        background: var(--danger);
-        border: none;
-        color: white;
-      }
+          rgba(255, 255, 255, 0.015));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
 
-      .status {
-        font-size: 13px;
-        color: var(--muted);
-        margin-top: 4px;
-      }
-      .log {
-        background: #0f1525;
-        border: 1px dashed var(--border);
-        border-radius: 12px;
-        padding: 10px;
-        height: 160px;
-        overflow: auto;
-        white-space: pre-wrap;
-      }
-      .tabs {
-        display: flex;
-        gap: 8px;
-        margin-top: 6px;
-        flex-wrap: wrap;
-        width: 35vw;
-      }
-      .tab {
-        padding: 8px 12px;
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        background: #0f1525;
-        cursor: pointer;
-        color: var(--muted);
-      }
-      .tab.active {
-        background: var(--accent);
-        color: #00192f;
-        border: none;
-      }
-      .year-tab {
-        padding: 8px 12px;
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        background: #0f1525;
-        cursor: pointer;
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .year-tab.active {
-        background: var(--accent);
-        color: #00192f;
-        border: none;
-      }
-      .year-content {
-        display: none;
-      }
-      .year-content.active {
-        display: block;
-      }
-      textarea {
-        width: 100%;
-        min-height: 220px;
-        padding: 12px;
-        resize: vertical;
-      }
-      .year-textarea {
-        width: 100%;
-        min-height: 220px;
-        padding: 12px;
-        resize: vertical;
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: #0f1525;
-        color: var(--text);
-      }
+    .row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
 
-      .pill {
-        display: inline-flex;
-        gap: 8px;
-        align-items: center;
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        padding: 6px 10px;
-        background: #0f1525;
-        color: var(--muted);
-      }
+    label {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input,
+    select,
+    button,
+    textarea {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0f1525;
+      color: var(--text);
+    }
+
+    input,
+    select {
+      padding: 10px 12px;
+      width: 100%;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    button {
+      padding: 10px 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #00192f;
+      border: none;
+    }
+
+    .btn-ghost {
+      background: transparent;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      border: none;
+      color: white;
+    }
+
+    .status {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .log {
+      background: #0f1525;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      height: 160px;
+      overflow: auto;
+      white-space: pre-wrap;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+      width: 35vw;
+    }
+
+    .tab {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #0f1525;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: #00192f;
+      border: none;
+    }
+
+    .year-tab {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #0f1525;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .year-tab.active {
+      background: var(--accent);
+      color: #00192f;
+      border: none;
+    }
+
+    .year-content {
+      display: none;
+    }
+
+    .year-content.active {
+      display: block;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: 12px;
+      resize: vertical;
+    }
+
+    .year-textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: 12px;
+      resize: vertical;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0f1525;
+      color: var(--text);
+    }
+
+    .pill {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #0f1525;
+      color: var(--muted);
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 820px) {
       .grid2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-      @media (max-width: 820px) {
-        .grid2 {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* Floating donate button */
-      .donate {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: 50;
-      }
-      .donate-btn {
-        width: 56px;
-        height: 56px;
-        border-radius: 99px;
-        background: var(--accent);
-        border: none;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-        cursor: pointer;
-        display: grid;
-        place-items: center;
-      }
-      .donate-btn span {
-        font-size: 22px;
-      }
-      .donate-btn:hover + .tip {
-        opacity: 1;
-        transform: translateY(-6px);
-      }
-      .tip {
-        position: absolute;
-        right: 70px;
-        bottom: 18px;
-        background: #0f1525;
-        border: 1px solid var(--border);
-        padding: 8px 12px;
-        border-radius: 10px;
-        color: var(--text);
-        opacity: 0;
-        transform: translateY(0);
-        transition: 0.2s;
-      }
-
-      /* Modal */
-      dialog {
-        border: none;
-        border-radius: 16px;
-        padding: 0;
-        background: transparent;
-      }
-      dialog::backdrop {
-        background: rgba(0, 0, 0, 0.55);
-      }
-      .modal {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 16px;
-        max-width: 420px;
-      }
-      .modal h3 {
-        margin: 0 0 8px;
-      }
-      .qr {
-        border-radius: 12px;
-        background: #fff;
-        padding: 12px;
-        display: inline-block;
-      }
-      .copyRow {
-        display: flex;
-        gap: 8px;
-        margin-top: 12px;
-      }
-      .copyRow input {
-        flex: 1;
-      }
-      .toast {
-        position: fixed;
-        left: 50%;
-        bottom: 84px;
-        transform: translateX(-50%);
-        background: #0f1525;
-        border: 1px solid var(--border);
-        padding: 10px 14px;
-        border-radius: 10px;
-        opacity: 0;
-        transition: 0.25s;
-      }
-      .toast.show {
-        opacity: 1;
-      }
-      /* How-to & Donate side-by-side */
-      .guideWrap {
-        margin-top: 6px;
-        display: grid;
         grid-template-columns: 1fr;
-        gap: 12px;
-        align-items: start;
-        grid-column: 1;
       }
-      @media (max-width: 900px) {
-        .guideWrap {
-          grid-template-columns: 1fr;
-        }
+    }
+
+    /* Floating donate button */
+    .donate {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+    }
+
+    .donate-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 99px;
+      background: var(--accent);
+      border: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    .donate-btn span {
+      font-size: 22px;
+    }
+
+    .donate-btn:hover+.tip {
+      opacity: 1;
+      transform: translateY(-6px);
+    }
+
+    .tip {
+      position: absolute;
+      right: 70px;
+      bottom: 18px;
+      background: #0f1525;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(0);
+      transition: 0.2s;
+    }
+
+    /* Modal */
+    dialog {
+      border: none;
+      border-radius: 16px;
+      padding: 0;
+      background: transparent;
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.55);
+    }
+
+    .modal {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      max-width: 420px;
+    }
+
+    .modal h3 {
+      margin: 0 0 8px;
+    }
+
+    .qr {
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px;
+      display: inline-block;
+    }
+
+    .copyRow {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .copyRow input {
+      flex: 1;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 84px;
+      transform: translateX(-50%);
+      background: #0f1525;
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 10px;
+      opacity: 0;
+      transition: 0.25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    /* How-to & Donate side-by-side */
+    .guideWrap {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      align-items: start;
+      grid-column: 1;
+    }
+
+    @media (max-width: 900px) {
+      .guideWrap {
+        grid-template-columns: 1fr;
       }
-      .howto {
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        padding: 12px;
-        background: linear-gradient(
-          135deg,
+    }
+
+    .howto {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 12px;
+      background: linear-gradient(135deg,
           rgba(255, 171, 64, 0.18),
-          rgba(255, 255, 255, 0.03)
-        );
+          rgba(255, 255, 255, 0.03));
+    }
+
+    .howto h3 {
+      margin: 0 0 6px;
+    }
+
+    .howto ol {
+      margin: 8px 0 0 18px;
+    }
+
+    .howto a {
+      color: #ffd48a;
+      text-decoration: underline;
+    }
+
+    .qrimg-big {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .qrimg-modal {
+      max-width: 260px;
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .addrLine {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .addrLine input {
+      flex: 1;
+      font-weight: 700;
+    }
+
+    .highlight {
+      font-weight: 800;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .shine {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: inline-block;
+      background: linear-gradient(90deg, #ffffff, #ffe9a8, #ffffff);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shineMove 2s ease-in-out infinite;
+    }
+
+    @keyframes shineMove {
+
+      0%,
+      85% {
+        background-position: 200% 0;
       }
-      .howto h3 {
-        margin: 0 0 6px;
+
+      100% {
+        background-position: 0 0;
       }
-      .howto ol {
-        margin: 8px 0 0 18px;
-      }
-      .howto a {
-        color: #ffd48a;
-        text-decoration: underline;
-      }
-      .qrimg-big {
-        max-width: 280px;
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 8px;
-      }
-      .qrimg-modal {
-        max-width: 260px;
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 8px;
-      }
-      .addrLine {
-        display: flex;
-        gap: 8px;
-        width: 100%;
-        margin-top: 12px;
-      }
-      .addrLine input {
-        flex: 1;
-        font-weight: 700;
-      }
-      .highlight {
-        font-weight: 800;
-        background: var(--accent);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .shine {
-        font-size: 18px;
-        font-weight: 800;
-        margin-bottom: 6px;
-        display: inline-block;
-        background: linear-gradient(90deg, #ffffff, #ffe9a8, #ffffff);
-        background-size: 200% 100%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shineMove 2s ease-in-out infinite;
-      }
-      @keyframes shineMove {
-        0%,
-        85% {
-          background-position: 200% 0;
-        }
-        100% {
-          background-position: 0 0;
-        }
-      }
-      .wrap .grid {
-        grid-column: 2;
-        margin-top: 0;
-      }
-      /* mạnh hơn cho ánh sáng chữ */
-      .shine {
-        font-size: 18px;
-        font-weight: 900;
-        margin-bottom: 6px;
-        display: inline-block;
-        background: linear-gradient(
-          90deg,
+    }
+
+    .wrap .grid {
+      grid-column: 2;
+      margin-top: 0;
+    }
+
+    /* mạnh hơn cho ánh sáng chữ */
+    .shine {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      display: inline-block;
+      background: linear-gradient(90deg,
           rgba(255, 255, 255, 0.25) 0%,
           #fff 20%,
           #ffd36e 35%,
           #fff 50%,
-          rgba(255, 255, 255, 0.25) 100%
-        );
-        background-size: 320% 100%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 14px rgba(255, 240, 180, 0.8),
-          0 0 28px rgba(255, 170, 0, 0.5);
-        animation: shineMove 2s linear infinite;
-      }
-      @keyframes shineMove {
-        0% {
-          background-position: 320% 0;
-        }
-        100% {
-          background-position: 0 0;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <div class="title">
-        <div class="logo"><b>WB</b></div>
-        <div>
-          <h1>Tool dò domain lv3 từ wayback machine by MAXROI DUBUA253K</h1>
-          <div class="status">TELE: @Takoju</div>
-          <div class="status" id="status">Sẵn sàng</div>
-        </div>
-        <span class="pill" id="statpill">URL: 0 • LV3: 0</span>
-      </div>
+          rgba(255, 255, 255, 0.25) 100%);
+      background-size: 320% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 14px rgba(255, 240, 180, 0.8),
+        0 0 28px rgba(255, 170, 0, 0.5);
+      animation: shineMove 2s linear infinite;
+    }
 
-      <div class="guideWrap">
-        <div class="howto">
-          <h3>Hướng dẫn nhanh</h3>
-          <ol>
-            <li>
-              <b>Bước 1:</b> fake VPN Việt Nam (Cam bị chặn) – có thể dùng Urban
-              VPN extension
-              <a
-                href="https://chromewebstore.google.com/detail/urban-vpn-proxy/eppiocemhmnlbhjplcgkofciiegomcon"
-                target="_blank"
-                rel="noopener"
-                >tại đây</a
-              >.
-            </li>
-            <li>
-              <b>Bước 2:</b> Tải
-              <a
-                href="https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf"
-                target="_blank"
-                rel="noopener"
-                >Allow CORS: Access-Control</a
-              >
-              → bật extension (bật ON là
-              <span class="highlight">màu cam</span>).
-            </li>
-            <li>
-              <b>Bước 3:</b> Chọn đuôi và lọc.
-              <i>Trỏ lên ủng hộ mình ly cf nhé ^^</i>
-            </li>
-          </ol>
-        </div>
-      </div>
+    @keyframes shineMove {
+      0% {
+        background-position: 320% 0;
+      }
 
-      <div class="grid">
-        <!-- New section: Manual URL input and domain filtering -->
-        <div class="card">
-          <h3 style="margin: 0 0 12px; color: var(--brand)">
-            📝 Lọc domain từ URL thủ công
-          </h3>
-          <div class="row">
-            <div>
-              <label>Suffix/Domain gốc để lọc (ví dụ: uk.com)</label>
-              <input id="filterSuffix" value="uk.com" />
-            </div>
+      100% {
+        background-position: 0 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="title">
+      <div class="logo"><b>WB</b></div>
+      <div>
+        <h1>Tool dò domain lv3 từ wayback machine</h1>
+        <div class="status" id="status">Sẵn sàng</div>
+      </div>
+      <span class="pill" id="statpill">URL: 0 • LV3: 0</span>
+    </div>
+
+    <div class="guideWrap">
+      <div class="howto">
+        <h3>Hướng dẫn nhanh</h3>
+        <ol>
+          <li>
+            <b>Bước 1:</b> fake VPN Việt Nam (Cam bị chặn) – có thể dùng Urban
+            VPN extension
+            <a href="https://chromewebstore.google.com/detail/urban-vpn-proxy/eppiocemhmnlbhjplcgkofciiegomcon"
+              target="_blank" rel="noopener">tại đây</a>.
+          </li>
+          <li>
+            <b>Bước 2:</b> Tải
+            <a href="https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf"
+              target="_blank" rel="noopener">Allow CORS: Access-Control</a>
+            → bật extension (bật ON là
+            <span class="highlight">màu cam</span>).
+          </li>
+          <li>
+            <b>Bước 3:</b> Chọn đuôi và lọc.
+            <i>Trỏ lên ủng hộ mình ly cf nhé ^^</i>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="row">
+          <div>
+            <label>Suffix/Domain gốc (ví dụ: uk.com)</label>
+            <input id="domain" value="uk.com" />
           </div>
           <div>
-            <label>Danh sách URL (mỗi URL một dòng)</label>
-            <textarea
-              id="urlInput"
-              placeholder="https://example1.uk.com/page&#10;https://sub.example2.uk.com/page&#10;https://a.b.c.uk.com/page"
-            ></textarea>
+            <label>Từ năm</label>
+            <input id="from" type="number" value="2020" />
           </div>
-          <div class="row">
-            <div class="check">
-              <input id="cleanManual" type="checkbox" checked />
-              <label for="cleanManual">Làm sạch query (gỡ UTM, fbclid…)</label>
-            </div>
-            <div class="check">
-              <input id="onlylv3Manual" type="checkbox" checked />
-              <label for="onlylv3Manual">Chỉ lấy domain LV3</label>
-            </div>
+          <div>
+            <label>Đến năm</label>
+            <input id="to" type="number" value="2025" />
           </div>
-          <div class="btns">
-            <button class="btn-primary" id="processUrls">Lọc domain</button>
-            <button class="btn-ghost" id="downloadManualUrls" disabled>
-              Tải .txt (URL)
-            </button>
-            <button class="btn-ghost" id="downloadManualLv3" disabled>
-              Tải .txt (Domain LV3)
-            </button>
+          <div>
+            <label>Page size</label>
+            <input id="pagesize" type="number" value="150" />
           </div>
-          <div class="grid2" style="margin-top: 12px">
-            <div class="card">
-              <div class="tabs">
-                <div class="tab active" data-tab="manual-urls">URL đã lọc</div>
-                <div class="tab" data-tab="manual-lv3">Domain LV3</div>
-              </div>
-              <textarea id="outManualUrls" style="display: block"></textarea>
-              <textarea id="outManualLv3" style="display: none"></textarea>
-            </div>
-            <div class="card">
-              <b>Kết quả</b>
-              <div class="log" id="logManual" style="height: 220px"></div>
-            </div>
+          <div>
+            <label>Max offset/năm</label>
+            <input id="maxoff" type="number" value="1500" />
           </div>
         </div>
+        <div class="row">
+          <div class="check">
+            <input id="clean" type="checkbox" checked />
+            <label for="clean">Làm sạch query (gỡ UTM, fbclid…)</label>
+          </div>
+          <div class="check">
+            <input id="ok200" type="checkbox" />
+            <label for="ok200">Chỉ HTTP 200</label>
+          </div>
+          <div class="check">
+            <input id="onlylv3" type="checkbox" checked />
+            <label for="onlylv3">Tự lọc subdomain → chỉ lấy domain LV3</label>
+          </div>
+        </div>
+        <div class="btns">
+          <button class="btn-primary" id="start">Bắt đầu</button>
+          <button class="btn-danger" id="stop" disabled>Dừng</button>
+          <button class="btn-ghost" id="download" disabled>
+            Tải .txt (URL)
+          </button>
+          <button class="btn-ghost" id="downloadLv3" disabled>
+            Tải .txt (Domain LV3)
+          </button>
+          <button class="btn-ghost" id="downloadHtml" disabled>
+            Tải HTML
+          </button>
+        </div>
+      </div>
 
+      <div class="grid2">
         <div class="card">
-          <div class="row">
-            <div>
-              <label>Suffix/Domain gốc (ví dụ: uk.com)</label>
-              <input id="domain" value="uk.com" />
-            </div>
-            <div>
-              <label>Từ năm</label>
-              <input id="from" type="number" value="2020" />
-            </div>
-            <div>
-              <label>Đến năm</label>
-              <input id="to" type="number" value="2025" />
-            </div>
-            <div>
-              <label>Page size</label>
-              <input id="pagesize" type="number" value="150" />
-            </div>
-            <div>
-              <label>Max offset/năm</label>
-              <input id="maxoff" type="number" value="1500" />
-            </div>
+          <div class="tabs" id="yearTabs"></div>
+          <div class="tabs" style="margin-top: 8px">
+            <div class="tab active" data-tab="urls">URL thô</div>
+            <div class="tab" data-tab="lv3">Danh sách domain LV3</div>
           </div>
-          <div class="row">
-            <div class="check">
-              <input id="clean" type="checkbox" checked />
-              <label for="clean">Làm sạch query (gỡ UTM, fbclid…)</label>
-            </div>
-            <div class="check">
-              <input id="ok200" type="checkbox" />
-              <label for="ok200">Chỉ HTTP 200</label>
-            </div>
-            <div class="check">
-              <input id="onlylv3" type="checkbox" checked />
-              <label for="onlylv3">Tự lọc subdomain → chỉ lấy domain LV3</label>
-            </div>
-          </div>
-          <div class="btns">
-            <button class="btn-primary" id="start">Bắt đầu</button>
-            <button class="btn-danger" id="stop" disabled>Dừng</button>
-            <button class="btn-ghost" id="download" disabled>
-              Tải .txt (URL)
-            </button>
-            <button class="btn-ghost" id="downloadLv3" disabled>
-              Tải .txt (Domain LV3)
-            </button>
-            <button class="btn-ghost" id="downloadHtml" disabled>
-              Tải HTML
-            </button>
-          </div>
+          <div id="yearContent"></div>
         </div>
-
-        <div class="grid2">
-          <div class="card">
-            <div class="tabs" id="yearTabs"></div>
-            <div class="tabs" style="margin-top: 8px">
-              <div class="tab active" data-tab="urls">URL thô</div>
-              <div class="tab" data-tab="lv3">Danh sách domain LV3</div>
-            </div>
-            <div id="yearContent"></div>
-          </div>
-          <div class="card">
-            <b>Log</b>
-            <div class="log" id="log"></div>
-          </div>
+        <div class="card">
+          <b>Log</b>
+          <div class="log" id="log"></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Donate floating button + tooltip -->
-    <div class="donate">
-      <button class="donate-btn" id="openDonate" title="Xin 1 ly cf ☕">
-        <span>☕</span>
-      </button>
-      <div class="tip">Xin 1 ly cf ☕</div>
-    </div>
+  <!-- Donate floating button + tooltip -->
+  <div class="donate">
+    <button class="donate-btn" id="openDonate" title="Xin 1 ly cf ☕">
+      <span>☕</span>
+    </button>
+    <div class="tip">Xin 1 ly cf ☕</div>
+  </div>
 
-    <dialog id="donateDlg">
-      <div class="modal">
-        <h3>Ủng hộ nhà phát minh tool ❤</h3>
-        <div class="status">BSC (BNB Smart Chain) – BEP20</div>
-        <div class="qr">
-          <img
-            class="qrimg-modal"
-            src="https://i.ibb.co/p67jTYGt/QR-META.png"
-            alt="QR BEP-20"
-          />
-        </div>
-        <div class="copyRow">
-          <input
-            id="addr"
-            value="0xce08d7bc0394a9D676576F778d1Bf0A503c0bc73"
-            readonly
-          />
-          <button class="btn-primary" id="copyBtn">Copy</button>
-        </div>
-        <div class="btns" style="margin-top: 14px">
-          <button class="btn-ghost" id="closeDonate">Đóng</button>
-        </div>
+  <dialog id="donateDlg">
+    <div class="modal">
+      <h3>Ủng hộ nhà phát minh tool ❤</h3>
+      <div class="status">BSC (BNB Smart Chain) – BEP20</div>
+      <div class="qr">
+        <img class="qrimg-modal" src="https://i.ibb.co/p67jTYGt/QR-META.png" alt="QR BEP-20" />
       </div>
-    </dialog>
-    <div class="toast" id="toast">Đã copy địa chỉ!</div>
+      <div class="copyRow">
+        <input id="addr" value="0xce08d7bc0394a9D676576F778d1Bf0A503c0bc73" readonly />
+        <button class="btn-primary" id="copyBtn">Copy</button>
+      </div>
+      <div class="btns" style="margin-top: 14px">
+        <button class="btn-ghost" id="closeDonate">Đóng</button>
+      </div>
+    </div>
+  </dialog>
+  <div class="toast" id="toast">Đã copy địa chỉ!</div>
 
-    <script>
-      // ===== Minimal QRCode generator (qrcode.js v1.0.0, trimmed) =====
-      /*! qrcode.js https://github.com/davidshimjs/qrcodejs */
-      !function(o){function t(o){this.mode=c.MODE_8BIT_BYTE,this.data=o}function e(o,t){this.typeNumber=o,this.errorCorrectLevel=t,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function r(o,t){if(void 0==o.length)throw new Error(o.length+"/"+t);for(var e=0;e<o.length&&0==o[e];)e++;this.num=Array(o.length-e+t);for(var r=0;r<o.length-e;r++)this.num[r]=o[r+e]}function n(o,t){this.totalCount=o,this.dataCount=t}function i(){var o=Array(0),t=0;this.getBuffer=function(){return o},this.getAt=function(t){return 1==(o[Math.floor(t/8)]>>>7-t%8&1)},this.put=function(t,e){for(var r=0;r<e;r++)this.putBit(1==(t>>>e-r-1&1))},this.putBit=function(e){t==o.length&&o.push(0),e&&(o[t>>>3]|=128>>>t%8),t++}}var s={L:1,M:0,Q:3,H:2},c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4},a={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(o){for(var t=o<<10;this.getBCHDigit(t)-this.getBCHDigit(this.G15)>=0;)t^=this.G15<<this.getBCHDigit(t)-this.getBCHDigit(this.G15);return(o<<10|t)^21522},getBCHTypeNumber:function(o){for(var t=o<<12;this.getBCHDigit(t)-this.getBCHDigit(this.G18)>=0;)t^=this.G18<<this.getBCHDigit(t)-this.getBCHDigit(this.G18);return o<<12|t},getBCHDigit:function(o){for(var t=0;0!=o;)t++,o>>>=1;return t},getPatternPosition:function(o){return this.PATTERN_POSITION_TABLE[o-1]},getMask:function(o,t){switch(o){case 0:return 0==(t.row+t.col)%2;case 1:return 0==t.row%2;case 2:return 0==t.col%3;case 3:return 0==(t.row+t.col)%3;case 4:return 0==(Math.floor(t.row/2)+Math.floor(t.col/3))%2;case 5:return 0==(t.row*t.col)%2+ (t.row*t.col)%3;case 6:return 0==((t.row*t.col)%3+(t.row+t.col)%2)%2;case 7:return 0==((t.row+t.col)%3+(t.row*t.col)%2)%2;default:throw new Error("bad maskPattern:"+o)}}};t.prototype={getLength:function(){return this.data.length},write:function(o){for(var t=0;t<this.data.length;t++)o.put(this.data.charCodeAt(t),8)}};var u={getRSBlocks:function(o,t){var e=function(o){switch(o){case 1:return 10;case 2:return 20;case 3:return 26;case 4:return 18;default:return 10}}(t);return[ new n(e, e-2) ]}};r.prototype={get:function(o){return this.num[o]},getLength:function(){return this.num.length},multiply:function(o){for(var t=Array(this.getLength()+o.getLength()-1),e=0;e<this.getLength();e++)for(var r=0;r<o.getLength();r++)t[e+r]^=e8[this.get(e)+o.get(r)];return new r(t,0)},mod:function(o){for(;this.getLength()-o.getLength()>=0;){var t=this.getLength()-o.getLength();for(var e=0;e<o.getLength();e++)this.num[e+t]^=o.get(e)}return this}},e.prototype={addData:function(o){this.dataList.push(new t(o)),this.dataCache=null},isDark:function(o,t){if(null==this.modules)throw new Error("QR not built");return this.modules[o][t]},getModuleCount:function(){return this.moduleCount},make:function(){this.typeNumber=2,this.dataCache=this.createData(this.typeNumber,this.errorCorrectLevel),this.moduleCount=25,this.modules=new Array(this.moduleCount);for(var o=0;o<this.moduleCount;o++){this.modules[o]=new Array(this.moduleCount);for(var t=0;t<this.moduleCount;t++)this.modules[o][t]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.mapData(this.dataCache,a.getMask(0,{row:0,col:0}))},setupPositionProbePattern:function(o,t){for(var e=-1;e<=7;e++)if(!(o+e<=-1||this.moduleCount<=o+e))for(var r=-1;r<=7;r++)t+r<=-1||this.moduleCount<=t+r||(this.modules[o+e][t+r]=e>=0&&e<=6&&(0==r||6==r)||r>=0&&r<=6&&(0==e||6==e)||e>=2&&e<=4&&r>=2&&r<=4)},mapData:function(o,t){for(var e=0,r=this.moduleCount-1,n=this.moduleCount-1;n>0;n-=2)for(6==n&&n--;;){for(var i=0;i<2;i++)if(null==this.modules[r][n-i]){var s=!1;e<o.length&&(s=1==(o[e>>>3]>>>7-e%8&1)),this.modules[r][n-i]=s,e++}if((r+=t?-1:1)<0||this.moduleCount<=r){r=t?0:this.moduleCount-1;break}}},createData:function(o,t){for(var e=new i,r=0;r<this.dataList.length;r++){var n=this.dataList[r];e.put(4,4),e.put(n.getLength(),8),n.write(e)}for(var s=u.getRSBlocks(o,t),c=0,a=0;a<s.length;a++)c+=s[a].dataCount;for(var l=new Array(c),h=0;h<this.dataList.length;h++){var f=this.dataList[h];for(f.getLength(),f.write(e),e.put(0,0);e.getBuffer().length<=c;)e.put(0,0);for(var d=0;d<c;d++)l[d]=255&e.getBuffer()[d]}return l}};var e8=function(){for(var o=new Array(256),t=1,e=0;e<256;e++)o[e]=t, t=t<<1^283*(t>>7);return o}();
-      window.QRCode=function(o){this._el=o};
-      QRCode.prototype.makeCode=function(text){this._el.innerHTML='';var qr=new e(2,s.M);qr.addData(text);qr.make();var m=qr.getModuleCount(),scl=6,qrEl=document.createElement('div');qrEl.style.width=qrEl.style.height=(m*scl)+'px';qrEl.style.background='#fff';for(var r=0;r<m;r++){for(var c=0;c<m;c++){var cell=document.createElement('div');cell.style.cssText='position:absolute;width:'+scl+'px;height:'+scl+'px;left:'+(c*scl)+'px;top:'+(r*scl)+'px;background:'+(qr.isDark(r,c)?'#000':'#fff');qrEl.appendChild(cell);} }
-      qrEl.style.position='relative';this._el.appendChild(qrEl)};
-      // ===== End QR =====
-    </script>
+  <script>
+    // ===== Minimal QRCode generator (qrcode.js v1.0.0, trimmed) =====
+    /*! qrcode.js https://github.com/davidshimjs/qrcodejs */
+    !function (o) {
+      function t(o) { this.mode = c.MODE_8BIT_BYTE, this.data = o } function e(o, t) { this.typeNumber = o, this.errorCorrectLevel = t, this.modules = null, this.moduleCount = 0, this.dataCache = null, this.dataList = [] } function r(o, t) { if (void 0 == o.length) throw new Error(o.length + "/" + t); for (var e = 0; e < o.length && 0 == o[e];)e++; this.num = Array(o.length - e + t); for (var r = 0; r < o.length - e; r++)this.num[r] = o[r + e] } function n(o, t) { this.totalCount = o, this.dataCount = t } function i() { var o = Array(0), t = 0; this.getBuffer = function () { return o }, this.getAt = function (t) { return 1 == (o[Math.floor(t / 8)] >>> 7 - t % 8 & 1) }, this.put = function (t, e) { for (var r = 0; r < e; r++)this.putBit(1 == (t >>> e - r - 1 & 1)) }, this.putBit = function (e) { t == o.length && o.push(0), e && (o[t >>> 3] |= 128 >>> t % 8), t++ } } var s = { L: 1, M: 0, Q: 3, H: 2 }, c = { MODE_NUMBER: 1, MODE_ALPHA_NUM: 2, MODE_8BIT_BYTE: 4 }, a = { PATTERN_POSITION_TABLE: [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46]], G15: 1335, G18: 7973, G15_MASK: 21522, getBCHTypeInfo: function (o) { for (var t = o << 10; this.getBCHDigit(t) - this.getBCHDigit(this.G15) >= 0;)t ^= this.G15 << this.getBCHDigit(t) - this.getBCHDigit(this.G15); return (o << 10 | t) ^ 21522 }, getBCHTypeNumber: function (o) { for (var t = o << 12; this.getBCHDigit(t) - this.getBCHDigit(this.G18) >= 0;)t ^= this.G18 << this.getBCHDigit(t) - this.getBCHDigit(this.G18); return o << 12 | t }, getBCHDigit: function (o) { for (var t = 0; 0 != o;)t++, o >>>= 1; return t }, getPatternPosition: function (o) { return this.PATTERN_POSITION_TABLE[o - 1] }, getMask: function (o, t) { switch (o) { case 0: return 0 == (t.row + t.col) % 2; case 1: return 0 == t.row % 2; case 2: return 0 == t.col % 3; case 3: return 0 == (t.row + t.col) % 3; case 4: return 0 == (Math.floor(t.row / 2) + Math.floor(t.col / 3)) % 2; case 5: return 0 == (t.row * t.col) % 2 + (t.row * t.col) % 3; case 6: return 0 == ((t.row * t.col) % 3 + (t.row + t.col) % 2) % 2; case 7: return 0 == ((t.row + t.col) % 3 + (t.row * t.col) % 2) % 2; default: throw new Error("bad maskPattern:" + o) } } }; t.prototype = { getLength: function () { return this.data.length }, write: function (o) { for (var t = 0; t < this.data.length; t++)o.put(this.data.charCodeAt(t), 8) } }; var u = { getRSBlocks: function (o, t) { var e = function (o) { switch (o) { case 1: return 10; case 2: return 20; case 3: return 26; case 4: return 18; default: return 10 } }(t); return [new n(e, e - 2)] } }; r.prototype = { get: function (o) { return this.num[o] }, getLength: function () { return this.num.length }, multiply: function (o) { for (var t = Array(this.getLength() + o.getLength() - 1), e = 0; e < this.getLength(); e++)for (var r = 0; r < o.getLength(); r++)t[e + r] ^= e8[this.get(e) + o.get(r)]; return new r(t, 0) }, mod: function (o) { for (; this.getLength() - o.getLength() >= 0;) { var t = this.getLength() - o.getLength(); for (var e = 0; e < o.getLength(); e++)this.num[e + t] ^= o.get(e) } return this } }, e.prototype = { addData: function (o) { this.dataList.push(new t(o)), this.dataCache = null }, isDark: function (o, t) { if (null == this.modules) throw new Error("QR not built"); return this.modules[o][t] }, getModuleCount: function () { return this.moduleCount }, make: function () { this.typeNumber = 2, this.dataCache = this.createData(this.typeNumber, this.errorCorrectLevel), this.moduleCount = 25, this.modules = new Array(this.moduleCount); for (var o = 0; o < this.moduleCount; o++) { this.modules[o] = new Array(this.moduleCount); for (var t = 0; t < this.moduleCount; t++)this.modules[o][t] = null } this.setupPositionProbePattern(0, 0), this.setupPositionProbePattern(this.moduleCount - 7, 0), this.setupPositionProbePattern(0, this.moduleCount - 7), this.mapData(this.dataCache, a.getMask(0, { row: 0, col: 0 })) }, setupPositionProbePattern: function (o, t) { for (var e = -1; e <= 7; e++)if (!(o + e <= -1 || this.moduleCount <= o + e)) for (var r = -1; r <= 7; r++)t + r <= -1 || this.moduleCount <= t + r || (this.modules[o + e][t + r] = e >= 0 && e <= 6 && (0 == r || 6 == r) || r >= 0 && r <= 6 && (0 == e || 6 == e) || e >= 2 && e <= 4 && r >= 2 && r <= 4) }, mapData: function (o, t) { for (var e = 0, r = this.moduleCount - 1, n = this.moduleCount - 1; n > 0; n -= 2)for (6 == n && n--; ;) { for (var i = 0; i < 2; i++)if (null == this.modules[r][n - i]) { var s = !1; e < o.length && (s = 1 == (o[e >>> 3] >>> 7 - e % 8 & 1)), this.modules[r][n - i] = s, e++ } if ((r += t ? -1 : 1) < 0 || this.moduleCount <= r) { r = t ? 0 : this.moduleCount - 1; break } } }, createData: function (o, t) { for (var e = new i, r = 0; r < this.dataList.length; r++) { var n = this.dataList[r]; e.put(4, 4), e.put(n.getLength(), 8), n.write(e) } for (var s = u.getRSBlocks(o, t), c = 0, a = 0; a < s.length; a++)c += s[a].dataCount; for (var l = new Array(c), h = 0; h < this.dataList.length; h++) { var f = this.dataList[h]; for (f.getLength(), f.write(e), e.put(0, 0); e.getBuffer().length <= c;)e.put(0, 0); for (var d = 0; d < c; d++)l[d] = 255 & e.getBuffer()[d] } return l } }; var e8 = function () { for (var o = new Array(256), t = 1, e = 0; e < 256; e++)o[e] = t, t = t << 1 ^ 283 * (t >> 7); return o }();
+      window.QRCode = function (o) { this._el = o };
+      QRCode.prototype.makeCode = function (text) {
+        this._el.innerHTML = ''; var qr = new e(2, s.M); qr.addData(text); qr.make(); var m = qr.getModuleCount(), scl = 6, qrEl = document.createElement('div'); qrEl.style.width = qrEl.style.height = (m * scl) + 'px'; qrEl.style.background = '#fff'; for (var r = 0; r < m; r++) { for (var c = 0; c < m; c++) { var cell = document.createElement('div'); cell.style.cssText = 'position:absolute;width:' + scl + 'px;height:' + scl + 'px;left:' + (c * scl) + 'px;top:' + (r * scl) + 'px;background:' + (qr.isDark(r, c) ? '#000' : '#fff'); qrEl.appendChild(cell); } }
+        qrEl.style.position = 'relative'; this._el.appendChild(qrEl)
+      };
+    // ===== End QR =====
+  </script>
 
-    <script>
-      (() => {
-        const CDX = "https://web.archive.org/cdx/search/cdx"; // gọi trực tiếp
-        const yearTabs = document.getElementById("yearTabs");
-        const yearContent = document.getElementById("yearContent");
-        const log = document.getElementById("log");
-        const statusEl = document.getElementById("status");
-        const pill = document.getElementById("statpill");
-        const btnStart = document.getElementById("start");
-        const btnStop = document.getElementById("stop");
-        const btnDl = document.getElementById("download");
-        const btnDlLv3 = document.getElementById("downloadLv3");
-        const btnHtml = document.getElementById("downloadHtml");
-        const tabs = document.querySelectorAll(
-          '[data-tab="urls"], [data-tab="lv3"]'
-        );
-
-        let stopFlag = false;
-        let dataByYear = {}; // { year: { urls: Set, lv3: Set } }
-        let currentYear = null;
-        let currentType = "urls"; // "urls" or "lv3"
-
-        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-        const logln = (s) => {
-          log.textContent += s + "\n";
-          log.scrollTop = log.scrollHeight;
-        };
-        const cleanURL = (u) => {
-          try {
-            const url = new URL(u);
-            const drop = new Set([
-              "ref",
-              "refid",
-              "refsrc",
-              "utm_source",
-              "utm_medium",
-              "utm_campaign",
-              "utm_term",
-              "utm_content",
-              "gclid",
-              "fbclid",
-              "mc_cid",
-              "mc_eid",
-            ]);
-            const params = [...url.searchParams.entries()].filter(
-              ([k]) => !drop.has(k.toLowerCase())
-            );
-            url.search = new URLSearchParams(params).toString();
-            url.hash = "";
-            url.hostname = url.hostname.toLowerCase();
-            return url.toString();
-          } catch {
-            return u;
-          }
-        };
-
-        // Trích domain LV3 theo suffix gốc. Nếu sâu hơn LV3, co về LV3 (ví dụ a.b.c.uk.com -> c.uk.com)
-        function toLv3(hostname, baseSuffix) {
-          hostname = hostname.toLowerCase();
-          if (!hostname.endsWith(baseSuffix)) return null; // chỉ lấy trong suffix
-          const hostParts = hostname.split(".");
-          const baseParts = baseSuffix.split(".");
-          if (hostParts.length <= baseParts.length) return null; // chính suffix, bỏ
-          const keep = baseParts.length + 1; // LV3 = 1 nhãn + suffix
-          return hostParts.slice(-keep).join(".");
-        }
-
-        async function fetchChunk(params, backoff = 800, tries = 5) {
-          const qs = new URLSearchParams(params);
-          const url = CDX + "?" + qs.toString();
-          for (let i = 0; i < tries; i++) {
-            try {
-              const r = await fetch(url, { cache: "no-store" });
-              if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-              const txt = await r.text();
-              return txt.split(/\r?\n/).filter(Boolean);
-            } catch (e) {
-              logln(
-                `  ! ${url}\n    → Retry ${i + 1}/${tries} vì: ${e.message}`
-              );
-              await sleep(backoff * (i + 1));
-            }
-          }
-          logln(`  x Bỏ qua chunk: ${url}`);
-          return [];
-        }
-
-        function updateStats() {
-          let totalUrls = 0;
-          let totalLv3 = 0;
-          for (const year in dataByYear) {
-            totalUrls += dataByYear[year].urls.size;
-            totalLv3 += dataByYear[year].lv3.size;
-          }
-          pill.textContent = `URL: ${totalUrls} • LV3: ${totalLv3}`;
-        }
-
-        function renderYearTabs() {
-          const years = Object.keys(dataByYear).sort((a, b) => +a - +b);
-          yearTabs.innerHTML = "";
-          years.forEach((year) => {
-            const tab = document.createElement("div");
-            tab.className = `year-tab ${year === currentYear ? "active" : ""}`;
-            tab.textContent = year;
-            tab.dataset.year = year;
-            tab.onclick = () => switchYear(year);
-            yearTabs.appendChild(tab);
-          });
-        }
-
-        function renderYearContent() {
-          if (!currentYear || !dataByYear[currentYear]) {
-            yearContent.innerHTML = "";
-            return;
-          }
-          const yearData = dataByYear[currentYear];
-          const urlsText = Array.from(yearData.urls).sort().join("\n");
-          const lv3Text = Array.from(yearData.lv3).sort().join("\n");
-
-          let out = document.getElementById("out");
-          let outLv3 = document.getElementById("outLv3");
-
-          if (!out) {
-            out = document.createElement("textarea");
-            out.id = "out";
-            out.className = "year-textarea";
-            yearContent.appendChild(out);
-          }
-          if (!outLv3) {
-            outLv3 = document.createElement("textarea");
-            outLv3.id = "outLv3";
-            outLv3.className = "year-textarea";
-            yearContent.appendChild(outLv3);
-          }
-
-          out.value = urlsText;
-          outLv3.value = lv3Text;
-          out.style.display = currentType === "urls" ? "block" : "none";
-          outLv3.style.display = currentType === "lv3" ? "block" : "none";
-        }
-
-        function switchYear(year) {
-          currentYear = year;
-          renderYearTabs();
-          renderYearContent();
-        }
-
-        async function run() {
-          stopFlag = false;
-          btnStart.disabled = true;
-          btnStop.disabled = false;
-          btnDl.disabled = true;
-          btnHtml.disabled = true;
-          btnDlLv3.disabled = true;
-          dataByYear = {};
-          currentYear = null;
-          yearTabs.innerHTML = "";
-          yearContent.innerHTML = "";
-          log.textContent = "";
-          statusEl.textContent = "Đang chạy…";
-
-          const domain = document.getElementById("domain").value.trim();
-          const yFrom = +document.getElementById("from").value;
-          const yTo = +document.getElementById("to").value;
-          const pageSize = +document.getElementById("pagesize").value;
-          const maxOff = +document.getElementById("maxoff").value;
-          const clean = document.getElementById("clean").checked;
-          const ok200 = document.getElementById("ok200").checked;
-          const onlylv3 = document.getElementById("onlylv3").checked;
-
-          for (let y = yFrom; y <= yTo; y++) {
-            if (stopFlag) break;
-            if (!dataByYear[y]) {
-              dataByYear[y] = { urls: new Set(), lv3: new Set() };
-            }
-            logln(`[*] Năm ${y}…`);
-            statusEl.textContent = `Năm ${y}…`;
-            for (let off = 0; off <= maxOff; off += pageSize) {
-              if (stopFlag) break;
-              const params = {
-                url: domain,
-                matchType: "domain",
-                output: "txt",
-                fl: "original",
-                collapse: "urlkey",
-                from: y,
-                to: y,
-                pageSize: pageSize,
-                offset: off,
-              };
-              if (ok200) params.filter = "statuscode:200";
-              const lines = await fetchChunk(params);
-              if (!lines.length) {
-                logln(`  • Hết dữ liệu ở offset ${off}.`);
-                break;
-              }
-              for (const u of lines) {
-                const finalU = clean ? cleanURL(u) : u;
-                dataByYear[y].urls.add(finalU);
-                try {
-                  const h = new URL(finalU).hostname;
-                  const lv3 = toLv3(h, domain);
-                  if (lv3) dataByYear[y].lv3.add(lv3);
-                } catch {}
-              }
-              renderYearTabs();
-              if (!currentYear) {
-                currentYear = String(y);
-                switchYear(currentYear);
-              } else {
-                renderYearContent();
-              }
-              updateStats();
-              logln(
-                `  • +${lines.length} URL @offset ${off} (năm ${y}: ${dataByYear[y].urls.size} URL; ${dataByYear[y].lv3.size} LV3)`
-              );
-              await sleep(120);
-            }
-          }
-          let totalUrls = 0;
-          let totalLv3 = 0;
-          for (const year in dataByYear) {
-            totalUrls += dataByYear[year].urls.size;
-            totalLv3 += dataByYear[year].lv3.size;
-          }
-          statusEl.textContent = `Xong. Tổng ${totalUrls} URL; ${totalLv3} domain LV3.`;
-          btnStart.disabled = false;
-          btnStop.disabled = true;
-          btnDl.disabled = false;
-          btnHtml.disabled = false;
-          btnDlLv3.disabled = false;
-        }
-
-        // Tabs for URL/LV3 switching
-        tabs.forEach((t) =>
-          t.addEventListener("click", () => {
-            tabs.forEach((x) => x.classList.remove("active"));
-            t.classList.add("active");
-            const tab = t.getAttribute("data-tab");
-            currentType = tab;
-            renderYearContent();
-          })
-        );
-
-        btnStart.onclick = run;
-        btnStop.onclick = () => {
-          stopFlag = true;
-          statusEl.textContent = "Đã yêu cầu dừng…";
-        };
-        btnDl.onclick = () => {
-          if (currentYear && dataByYear[currentYear]) {
-            const urls = Array.from(dataByYear[currentYear].urls)
-              .sort()
-              .join("\n");
-            downloadText(urls, `wayback_urls_${currentYear}_${Date.now()}.txt`);
-          } else {
-            // Download all years
-            let allUrls = [];
-            for (const year in dataByYear) {
-              allUrls.push(`\n=== Năm ${year} ===\n`);
-              allUrls.push(Array.from(dataByYear[year].urls).sort().join("\n"));
-            }
-            downloadText(
-              allUrls.join("\n"),
-              `wayback_urls_all_${Date.now()}.txt`
-            );
-          }
-        };
-        btnDlLv3.onclick = () => {
-          if (currentYear && dataByYear[currentYear]) {
-            const lv3 = Array.from(dataByYear[currentYear].lv3)
-              .sort()
-              .join("\n");
-            downloadText(lv3, `domains_lv3_${currentYear}_${Date.now()}.txt`);
-          } else {
-            // Download all years
-            let allLv3 = [];
-            for (const year in dataByYear) {
-              allLv3.push(`\n=== Năm ${year} ===\n`);
-              allLv3.push(Array.from(dataByYear[year].lv3).sort().join("\n"));
-            }
-            downloadText(
-              allLv3.join("\n"),
-              `domains_lv3_all_${Date.now()}.txt`
-            );
-          }
-        };
-        btnHtml.onclick = () => {
-          let htmlContent = `<!doctype html><meta charset="utf-8"><title>Kết quả Wayback</title><h1>Kết quả Wayback Machine</h1>`;
-          const years = Object.keys(dataByYear).sort((a, b) => +a - +b);
-          for (const year of years) {
-            const urls = Array.from(dataByYear[year].urls).sort().join("\n");
-            const lv3 = Array.from(dataByYear[year].lv3).sort().join("\n");
-            htmlContent += `<h2>Năm ${year}</h2><h3>Domain LV3 (${
-              dataByYear[year].lv3.size
-            })</h3><pre>${escapeHtml(lv3)}</pre><h3>URL (${
-              dataByYear[year].urls.size
-            })</h3><pre>${escapeHtml(urls)}</pre>`;
-          }
-          const blob = new Blob([htmlContent], {
-            type: "text/html;charset=utf-8",
-          });
-          const a = document.createElement("a");
-          a.href = URL.createObjectURL(blob);
-          a.download = `wayback_results_${Date.now()}.html`;
-          a.click();
-          URL.revokeObjectURL(a.href);
-        };
-
-        function downloadText(text, name) {
-          const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-          const a = document.createElement("a");
-          a.href = URL.createObjectURL(blob);
-          a.download = name;
-          a.click();
-          URL.revokeObjectURL(a.href);
-        }
-        function escapeHtml(s) {
-          return s.replace(
-            /[&<>]/g,
-            (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])
+  <script>
+        (() => {
+          const CDX = "https://web.archive.org/cdx/search/cdx"; // gọi trực tiếp
+          const yearTabs = document.getElementById("yearTabs");
+          const yearContent = document.getElementById("yearContent");
+          const log = document.getElementById("log");
+          const statusEl = document.getElementById("status");
+          const pill = document.getElementById("statpill");
+          const btnStart = document.getElementById("start");
+          const btnStop = document.getElementById("stop");
+          const btnDl = document.getElementById("download");
+          const btnDlLv3 = document.getElementById("downloadLv3");
+          const btnHtml = document.getElementById("downloadHtml");
+          const tabs = document.querySelectorAll(
+            '[data-tab="urls"], [data-tab="lv3"]'
           );
-        }
 
-        // Donate modal & QR
-        const openD = document.getElementById("openDonate");
-        const dlg = document.getElementById("donateDlg");
-        const closeD = document.getElementById("closeDonate");
-        const addr = document.getElementById("addr");
-        const copyBtn = document.getElementById("copyBtn");
-        const toast = document.getElementById("toast");
-        function openDonate() {
-          dlg.showModal();
-        }
-        function closeDonate() {
-          dlg.close();
-        }
-        function copy() {
-          navigator.clipboard.writeText(addr.value).then(() => {
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 1200);
-          });
-        }
-        openD.addEventListener("click", openDonate);
-        closeD.addEventListener("click", closeDonate);
-        copyBtn.addEventListener("click", copy);
-      })();
-    </script>
+          let stopFlag = false;
+          let dataByYear = {}; // { year: { urls: Set, lv3: Set } }
+          let currentYear = null;
+          let currentType = "urls"; // "urls" or "lv3"
 
-    <!-- Manual URL processing script -->
-    <script>
-      (() => {
-        const urlInput = document.getElementById("urlInput");
-        const filterSuffix = document.getElementById("filterSuffix");
-        const cleanManual = document.getElementById("cleanManual");
-        const onlylv3Manual = document.getElementById("onlylv3Manual");
-        const processBtn = document.getElementById("processUrls");
-        const outManualUrls = document.getElementById("outManualUrls");
-        const outManualLv3 = document.getElementById("outManualLv3");
-        const logManual = document.getElementById("logManual");
-        const btnDlManualUrls = document.getElementById("downloadManualUrls");
-        const btnDlManualLv3 = document.getElementById("downloadManualLv3");
-        const tabsManual = document.querySelectorAll('[data-tab^="manual-"]');
-
-        const loglnManual = (s) => {
-          logManual.textContent += s + "\n";
-          logManual.scrollTop = logManual.scrollHeight;
-        };
-
-        const cleanURL = (u) => {
-          try {
-            const url = new URL(u);
-            const drop = new Set([
-              "ref",
-              "refid",
-              "refsrc",
-              "utm_source",
-              "utm_medium",
-              "utm_campaign",
-              "utm_term",
-              "utm_content",
-              "gclid",
-              "fbclid",
-              "mc_cid",
-              "mc_eid",
-            ]);
-            const params = [...url.searchParams.entries()].filter(
-              ([k]) => !drop.has(k.toLowerCase())
-            );
-            url.search = new URLSearchParams(params).toString();
-            url.hash = "";
-            url.hostname = url.hostname.toLowerCase();
-            return url.toString();
-          } catch {
-            return u;
-          }
-        };
-
-        function toLv3(hostname, baseSuffix) {
-          hostname = hostname.toLowerCase();
-          if (!hostname.endsWith(baseSuffix)) return null;
-          const hostParts = hostname.split(".");
-          const baseParts = baseSuffix.split(".");
-          if (hostParts.length <= baseParts.length) return null;
-          const keep = baseParts.length + 1;
-          return hostParts.slice(-keep).join(".");
-        }
-
-        function processManualUrls() {
-          const urls = urlInput.value.split("\n").filter((line) => line.trim());
-          const suffix = filterSuffix.value.trim();
-          const clean = cleanManual.checked;
-          const onlylv3 = onlylv3Manual.checked;
-
-          if (!urls.length) {
-            loglnManual("❌ Vui lòng nhập ít nhất 1 URL");
-            return;
-          }
-
-          logManual.textContent = "";
-          loglnManual(`[*] Đang xử lý ${urls.length} URL...`);
-
-          const uniqURL = new Set();
-          const uniqLv3 = new Set();
-          let validCount = 0;
-          let invalidCount = 0;
-
-          for (const u of urls) {
-            const trimmed = u.trim();
-            if (!trimmed) continue;
-
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          const logln = (s) => {
+            log.textContent += s + "\n";
+            log.scrollTop = log.scrollHeight;
+          };
+          const cleanURL = (u) => {
             try {
-              const finalU = clean ? cleanURL(trimmed) : trimmed;
-              const urlObj = new URL(finalU);
-              const hostname = urlObj.hostname;
-
-              uniqURL.add(finalU);
-
-              if (onlylv3) {
-                const lv3 = toLv3(hostname, suffix);
-                if (lv3) {
-                  uniqLv3.add(lv3);
-                }
-              } else {
-                uniqLv3.add(hostname);
-              }
-
-              validCount++;
-            } catch (e) {
-              invalidCount++;
-              loglnManual(`  ⚠ Bỏ qua URL không hợp lệ: ${trimmed}`);
+              const url = new URL(u);
+              const drop = new Set([
+                "ref",
+                "refid",
+                "refsrc",
+                "utm_source",
+                "utm_medium",
+                "utm_campaign",
+                "utm_term",
+                "utm_content",
+                "gclid",
+                "fbclid",
+                "mc_cid",
+                "mc_eid",
+              ]);
+              const params = [...url.searchParams.entries()].filter(
+                ([k]) => !drop.has(k.toLowerCase())
+              );
+              url.search = new URLSearchParams(params).toString();
+              url.hash = "";
+              url.hostname = url.hostname.toLowerCase();
+              return url.toString();
+            } catch {
+              return u;
             }
+          };
+
+          // Trích domain LV3 theo suffix gốc. Nếu sâu hơn LV3, co về LV3 (ví dụ a.b.c.uk.com -> c.uk.com)
+          function toLv3(hostname, baseSuffix) {
+            hostname = hostname.toLowerCase();
+            if (!hostname.endsWith(baseSuffix)) return null; // chỉ lấy trong suffix
+            const hostParts = hostname.split(".");
+            const baseParts = baseSuffix.split(".");
+            if (hostParts.length <= baseParts.length) return null; // chính suffix, bỏ
+            const keep = baseParts.length + 1; // LV3 = 1 nhãn + suffix
+            return hostParts.slice(-keep).join(".");
           }
 
-          outManualUrls.value = Array.from(uniqURL).sort().join("\n");
-          outManualLv3.value = Array.from(uniqLv3).sort().join("\n");
-
-          loglnManual(`✓ Hoàn thành!`);
-          loglnManual(`  • URL hợp lệ: ${validCount}`);
-          loglnManual(`  • URL không hợp lệ: ${invalidCount}`);
-          loglnManual(`  • URL duy nhất: ${uniqURL.size}`);
-          loglnManual(`  • Domain duy nhất: ${uniqLv3.size}`);
-
-          btnDlManualUrls.disabled = false;
-          btnDlManualLv3.disabled = false;
-        }
-
-        // Tab switching for manual section
-        tabsManual.forEach((t) =>
-          t.addEventListener("click", () => {
-            tabsManual.forEach((x) => x.classList.remove("active"));
-            t.classList.add("active");
-            const tab = t.getAttribute("data-tab");
-            if (tab === "manual-urls") {
-              outManualUrls.style.display = "block";
-              outManualLv3.style.display = "none";
-            } else {
-              outManualUrls.style.display = "none";
-              outManualLv3.style.display = "block";
+          async function fetchChunk(params, backoff = 800, tries = 5) {
+            const qs = new URLSearchParams(params);
+            const url = CDX + "?" + qs.toString();
+            for (let i = 0; i < tries; i++) {
+              try {
+                const r = await fetch(url, { cache: "no-store" });
+                if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+                const txt = await r.text();
+                return txt.split(/\r?\n/).filter(Boolean);
+              } catch (e) {
+                logln(
+                  `  ! ${url}\n    → Retry ${i + 1}/${tries} vì: ${e.message}`
+                );
+                await sleep(backoff * (i + 1));
+              }
             }
-          })
-        );
+            logln(`  x Bỏ qua chunk: ${url}`);
+            return [];
+          }
 
-        processBtn.onclick = processManualUrls;
-        btnDlManualUrls.onclick = () =>
-          downloadText(outManualUrls.value, `manual_urls_${Date.now()}.txt`);
-        btnDlManualLv3.onclick = () =>
-          downloadText(outManualLv3.value, `manual_domains_${Date.now()}.txt`);
+          function updateStats() {
+            let totalUrls = 0;
+            let totalLv3 = 0;
+            for (const year in dataByYear) {
+              totalUrls += dataByYear[year].urls.size;
+              totalLv3 += dataByYear[year].lv3.size;
+            }
+            pill.textContent = `URL: ${totalUrls} • LV3: ${totalLv3}`;
+          }
 
-        function downloadText(text, name) {
-          const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-          const a = document.createElement("a");
-          a.href = URL.createObjectURL(blob);
-          a.download = name;
-          a.click();
-          URL.revokeObjectURL(a.href);
-        }
-      })();
-    </script>
+          function renderYearTabs() {
+            const years = Object.keys(dataByYear).sort((a, b) => +a - +b);
+            yearTabs.innerHTML = "";
+            years.forEach((year) => {
+              const tab = document.createElement("div");
+              tab.className = `year-tab ${year === currentYear ? "active" : ""}`;
+              tab.textContent = year;
+              tab.dataset.year = year;
+              tab.onclick = () => switchYear(year);
+              yearTabs.appendChild(tab);
+            });
+          }
 
-    <script>
+          function renderYearContent() {
+            if (!currentYear || !dataByYear[currentYear]) {
+              yearContent.innerHTML = "";
+              return;
+            }
+            const yearData = dataByYear[currentYear];
+            const urlsText = Array.from(yearData.urls).sort().join("\n");
+            const lv3Text = Array.from(yearData.lv3).sort().join("\n");
+
+            let out = document.getElementById("out");
+            let outLv3 = document.getElementById("outLv3");
+
+            if (!out) {
+              out = document.createElement("textarea");
+              out.id = "out";
+              out.className = "year-textarea";
+              yearContent.appendChild(out);
+            }
+            if (!outLv3) {
+              outLv3 = document.createElement("textarea");
+              outLv3.id = "outLv3";
+              outLv3.className = "year-textarea";
+              yearContent.appendChild(outLv3);
+            }
+
+            out.value = urlsText;
+            outLv3.value = lv3Text;
+            out.style.display = currentType === "urls" ? "block" : "none";
+            outLv3.style.display = currentType === "lv3" ? "block" : "none";
+          }
+
+          function switchYear(year) {
+            currentYear = year;
+            renderYearTabs();
+            renderYearContent();
+          }
+
+          async function run() {
+            stopFlag = false;
+            btnStart.disabled = true;
+            btnStop.disabled = false;
+            btnDl.disabled = true;
+            btnHtml.disabled = true;
+            btnDlLv3.disabled = true;
+            dataByYear = {};
+            currentYear = null;
+            yearTabs.innerHTML = "";
+            yearContent.innerHTML = "";
+            log.textContent = "";
+            statusEl.textContent = "Đang chạy…";
+
+            const domain = document.getElementById("domain").value.trim();
+            const yFrom = +document.getElementById("from").value;
+            const yTo = +document.getElementById("to").value;
+            const pageSize = +document.getElementById("pagesize").value;
+            const maxOff = +document.getElementById("maxoff").value;
+            const clean = document.getElementById("clean").checked;
+            const ok200 = document.getElementById("ok200").checked;
+            const onlylv3 = document.getElementById("onlylv3").checked;
+
+            for (let y = yFrom; y <= yTo; y++) {
+              if (stopFlag) break;
+              if (!dataByYear[y]) {
+                dataByYear[y] = { urls: new Set(), lv3: new Set() };
+              }
+              logln(`[*] Năm ${y}…`);
+              statusEl.textContent = `Năm ${y}…`;
+              for (let off = 0; off <= maxOff; off += pageSize) {
+                if (stopFlag) break;
+                const params = {
+                  url: domain,
+                  matchType: "domain",
+                  output: "txt",
+                  fl: "original",
+                  collapse: "urlkey",
+                  from: y,
+                  to: y,
+                  pageSize: pageSize,
+                  offset: off,
+                };
+                if (ok200) params.filter = "statuscode:200";
+                const lines = await fetchChunk(params);
+                if (!lines.length) {
+                  logln(`  • Hết dữ liệu ở offset ${off}.`);
+                  break;
+                }
+                for (const u of lines) {
+                  const finalU = clean ? cleanURL(u) : u;
+                  dataByYear[y].urls.add(finalU);
+                  try {
+                    const h = new URL(finalU).hostname;
+                    const lv3 = toLv3(h, domain);
+                    if (lv3) dataByYear[y].lv3.add(lv3);
+                  } catch { }
+                }
+                renderYearTabs();
+                if (!currentYear) {
+                  currentYear = String(y);
+                  switchYear(currentYear);
+                } else {
+                  renderYearContent();
+                }
+                updateStats();
+                logln(
+                  `  • +${lines.length} URL @offset ${off} (năm ${y}: ${dataByYear[y].urls.size} URL; ${dataByYear[y].lv3.size} LV3)`
+                );
+                await sleep(120);
+              }
+            }
+            let totalUrls = 0;
+            let totalLv3 = 0;
+            for (const year in dataByYear) {
+              totalUrls += dataByYear[year].urls.size;
+              totalLv3 += dataByYear[year].lv3.size;
+            }
+            statusEl.textContent = `Xong. Tổng ${totalUrls} URL; ${totalLv3} domain LV3.`;
+            btnStart.disabled = false;
+            btnStop.disabled = true;
+            btnDl.disabled = false;
+            btnHtml.disabled = false;
+            btnDlLv3.disabled = false;
+          }
+
+          // Tabs for URL/LV3 switching
+          tabs.forEach((t) =>
+            t.addEventListener("click", () => {
+              tabs.forEach((x) => x.classList.remove("active"));
+              t.classList.add("active");
+              const tab = t.getAttribute("data-tab");
+              currentType = tab;
+              renderYearContent();
+            })
+          );
+
+          btnStart.onclick = run;
+          btnStop.onclick = () => {
+            stopFlag = true;
+            statusEl.textContent = "Đã yêu cầu dừng…";
+          };
+          btnDl.onclick = () => {
+            if (currentYear && dataByYear[currentYear]) {
+              const urls = Array.from(dataByYear[currentYear].urls)
+                .sort()
+                .join("\n");
+              downloadText(urls, `wayback_urls_${currentYear}_${Date.now()}.txt`);
+            } else {
+              // Download all years
+              let allUrls = [];
+              for (const year in dataByYear) {
+                allUrls.push(`\n=== Năm ${year} ===\n`);
+                allUrls.push(Array.from(dataByYear[year].urls).sort().join("\n"));
+              }
+              downloadText(
+                allUrls.join("\n"),
+                `wayback_urls_all_${Date.now()}.txt`
+              );
+            }
+          };
+          btnDlLv3.onclick = () => {
+            if (currentYear && dataByYear[currentYear]) {
+              const lv3 = Array.from(dataByYear[currentYear].lv3)
+                .sort()
+                .join("\n");
+              downloadText(lv3, `domains_lv3_${currentYear}_${Date.now()}.txt`);
+            } else {
+              // Download all years
+              let allLv3 = [];
+              for (const year in dataByYear) {
+                allLv3.push(`\n=== Năm ${year} ===\n`);
+                allLv3.push(Array.from(dataByYear[year].lv3).sort().join("\n"));
+              }
+              downloadText(
+                allLv3.join("\n"),
+                `domains_lv3_all_${Date.now()}.txt`
+              );
+            }
+          };
+          btnHtml.onclick = () => {
+            let htmlContent = `<!doctype html><meta charset="utf-8"><title>Kết quả Wayback</title><h1>Kết quả Wayback Machine</h1>`;
+            const years = Object.keys(dataByYear).sort((a, b) => +a - +b);
+            for (const year of years) {
+              const urls = Array.from(dataByYear[year].urls).sort().join("\n");
+              const lv3 = Array.from(dataByYear[year].lv3).sort().join("\n");
+              htmlContent += `<h2>Năm ${year}</h2><h3>Domain LV3 (${dataByYear[year].lv3.size
+                })</h3><pre>${escapeHtml(lv3)}</pre><h3>URL (${dataByYear[year].urls.size
+                })</h3><pre>${escapeHtml(urls)}</pre>`;
+            }
+            const blob = new Blob([htmlContent], {
+              type: "text/html;charset=utf-8",
+            });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = `wayback_results_${Date.now()}.html`;
+            a.click();
+            URL.revokeObjectURL(a.href);
+          };
+
+          function downloadText(text, name) {
+            const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = name;
+            a.click();
+            URL.revokeObjectURL(a.href);
+          }
+          function escapeHtml(s) {
+            return s.replace(
+              /[&<>]/g,
+              (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])
+            );
+          }
+
+          // Donate modal & QR
+          const openD = document.getElementById("openDonate");
+          const dlg = document.getElementById("donateDlg");
+          const closeD = document.getElementById("closeDonate");
+          const addr = document.getElementById("addr");
+          const copyBtn = document.getElementById("copyBtn");
+          const toast = document.getElementById("toast");
+          function openDonate() {
+            dlg.showModal();
+          }
+          function closeDonate() {
+            dlg.close();
+          }
+          function copy() {
+            navigator.clipboard.writeText(addr.value).then(() => {
+              toast.classList.add("show");
+              setTimeout(() => toast.classList.remove("show"), 1200);
+            });
+          }
+          openD.addEventListener("click", openDonate);
+          closeD.addEventListener("click", closeDonate);
+          copyBtn.addEventListener("click", copy);
+        })();
+  </script>
+
+  <!-- Manual URL processing script -->
+  <script>
+        (() => {
+          const urlInput = document.getElementById("urlInput");
+          const filterSuffix = document.getElementById("filterSuffix");
+          const cleanManual = document.getElementById("cleanManual");
+          const onlylv3Manual = document.getElementById("onlylv3Manual");
+          const processBtn = document.getElementById("processUrls");
+          const outManualUrls = document.getElementById("outManualUrls");
+          const outManualLv3 = document.getElementById("outManualLv3");
+          const logManual = document.getElementById("logManual");
+          const btnDlManualUrls = document.getElementById("downloadManualUrls");
+          const btnDlManualLv3 = document.getElementById("downloadManualLv3");
+          const tabsManual = document.querySelectorAll('[data-tab^="manual-"]');
+
+          const loglnManual = (s) => {
+            logManual.textContent += s + "\n";
+            logManual.scrollTop = logManual.scrollHeight;
+          };
+
+          const cleanURL = (u) => {
+            try {
+              const url = new URL(u);
+              const drop = new Set([
+                "ref",
+                "refid",
+                "refsrc",
+                "utm_source",
+                "utm_medium",
+                "utm_campaign",
+                "utm_term",
+                "utm_content",
+                "gclid",
+                "fbclid",
+                "mc_cid",
+                "mc_eid",
+              ]);
+              const params = [...url.searchParams.entries()].filter(
+                ([k]) => !drop.has(k.toLowerCase())
+              );
+              url.search = new URLSearchParams(params).toString();
+              url.hash = "";
+              url.hostname = url.hostname.toLowerCase();
+              return url.toString();
+            } catch {
+              return u;
+            }
+          };
+
+          function toLv3(hostname, baseSuffix) {
+            hostname = hostname.toLowerCase();
+            if (!hostname.endsWith(baseSuffix)) return null;
+            const hostParts = hostname.split(".");
+            const baseParts = baseSuffix.split(".");
+            if (hostParts.length <= baseParts.length) return null;
+            const keep = baseParts.length + 1;
+            return hostParts.slice(-keep).join(".");
+          }
+
+          function processManualUrls() {
+            const urls = urlInput.value.split("\n").filter((line) => line.trim());
+            const suffix = filterSuffix.value.trim();
+            const clean = cleanManual.checked;
+            const onlylv3 = onlylv3Manual.checked;
+
+            if (!urls.length) {
+              loglnManual("❌ Vui lòng nhập ít nhất 1 URL");
+              return;
+            }
+
+            logManual.textContent = "";
+            loglnManual(`[*] Đang xử lý ${urls.length} URL...`);
+
+            const uniqURL = new Set();
+            const uniqLv3 = new Set();
+            let validCount = 0;
+            let invalidCount = 0;
+
+            for (const u of urls) {
+              const trimmed = u.trim();
+              if (!trimmed) continue;
+
+              try {
+                const finalU = clean ? cleanURL(trimmed) : trimmed;
+                const urlObj = new URL(finalU);
+                const hostname = urlObj.hostname;
+
+                uniqURL.add(finalU);
+
+                if (onlylv3) {
+                  const lv3 = toLv3(hostname, suffix);
+                  if (lv3) {
+                    uniqLv3.add(lv3);
+                  }
+                } else {
+                  uniqLv3.add(hostname);
+                }
+
+                validCount++;
+              } catch (e) {
+                invalidCount++;
+                loglnManual(`  ⚠ Bỏ qua URL không hợp lệ: ${trimmed}`);
+              }
+            }
+
+            outManualUrls.value = Array.from(uniqURL).sort().join("\n");
+            outManualLv3.value = Array.from(uniqLv3).sort().join("\n");
+
+            loglnManual(`✓ Hoàn thành!`);
+            loglnManual(`  • URL hợp lệ: ${validCount}`);
+            loglnManual(`  • URL không hợp lệ: ${invalidCount}`);
+            loglnManual(`  • URL duy nhất: ${uniqURL.size}`);
+            loglnManual(`  • Domain duy nhất: ${uniqLv3.size}`);
+
+            btnDlManualUrls.disabled = false;
+            btnDlManualLv3.disabled = false;
+          }
+
+          // Tab switching for manual section
+          tabsManual.forEach((t) =>
+            t.addEventListener("click", () => {
+              tabsManual.forEach((x) => x.classList.remove("active"));
+              t.classList.add("active");
+              const tab = t.getAttribute("data-tab");
+              if (tab === "manual-urls") {
+                outManualUrls.style.display = "block";
+                outManualLv3.style.display = "none";
+              } else {
+                outManualUrls.style.display = "none";
+                outManualLv3.style.display = "block";
+              }
+            })
+          );
+
+          processBtn.onclick = processManualUrls;
+          btnDlManualUrls.onclick = () =>
+            downloadText(outManualUrls.value, `manual_urls_${Date.now()}.txt`);
+          btnDlManualLv3.onclick = () =>
+            downloadText(outManualLv3.value, `manual_domains_${Date.now()}.txt`);
+
+          function downloadText(text, name) {
+            const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = name;
+            a.click();
+            URL.revokeObjectURL(a.href);
+          }
+        })();
+  </script>
+
+  <script>
       (function () {
         const toast = document.getElementById("toast");
         const btn = document.getElementById("copy2");
@@ -1169,6 +1156,7 @@
           });
         }
       })();
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
